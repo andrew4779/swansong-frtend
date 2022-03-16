@@ -1,0 +1,55 @@
+<div class="card mt-4">
+  <div class="card-header text-center">
+    <h3>Sign in</h3>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <input
+          type="email"
+          class="form-control"
+          formControlName="email"
+          placeholder="Email"
+          required
+        />
+        <div *ngIf="email.invalid && (email.dirty || email.touched)">
+          <small class="text-danger" *ngIf="email.errors.required"
+            >Please write an email</small
+          >
+          <small class="text-danger" *ngIf="email.errors.email"
+            >Please write a valid email</small
+          >
+        </div>
+      </div>
+      <div class="form-group">
+        <input
+          type="password"
+          class="form-control"
+          formControlName="password"
+          placeholder="Password"
+        />
+        <div *ngIf="password.invalid && (password.dirty || password.touched)">
+          <small class="text-danger" *ngIf="password.errors.required"
+            >Don't forget your password</small
+          >
+        </div>
+      </div>
+      <div class="form-group">
+        <button
+          type="submit"
+          [disabled]="!signInForm.valid || isLoading"
+          class="btn btn-primary btn-block"
+        >
+          <span
+            *ngIf="isLoading"
+            class="spinner-border spinner-border-sm"
+            role="status"
+            aria-hidden="true"
+          ></span>
+          Sign in
+        </button>
+      </div>
+    </form>
+    <a routerLink="/signup">I need an account</a>
+  </div>
+</div>
